@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Smart Fridge</title>
+<style>
+body { margin:0; font-family: Arial,sans-serif; background:#ffe5ec; }
+.container { width:90%; max-width:1000px; margin:50px auto; background:#ffccd5; padding:30px; border-radius:20px; box-shadow:0 0 15px rgba(0,0,0,0.2); text-align:center; }
+h1 { color:#ff4d6d; }
+p { color:#6b2737; }
+.nav-buttons { margin:20px 0; }
+.nav-buttons button { margin:5px; padding:10px 20px; font-size:16px; border:none; border-radius:10px; background:#ff4d6d; color:white; cursor:pointer; transition:0.3s; }
+.nav-buttons button:hover { background:#e63956; }
+.recipes { display:flex; justify-content:space-between; margin-top:30px; flex-wrap:wrap; }
+.recipe-card { background:#fff0f5; border-radius:15px; width:30%; padding:15px; margin-bottom:20px; box-shadow:0 3px 10px rgba(0,0,0,0.1); text-align:center; }
+.recipe-card img { width:100%; border-radius:10px; height:150px; object-fit:cover; }
+.recipe-card h3 { color:#ff4d6d; margin:10px 0 5px 0; }
+.recipe-card p { font-size:14px; color:#6b2737; }
+@media (max-width:800px){ .recipes { flex-direction:column; align-items:center; } .recipe-card { width:80%; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Dashboard</h1>
+  <p>Welcome to your Smart Refrigerator Dashboard! Here you can see items, add new items, and view fridge info.</p>
+
+  <div class="nav-buttons">
+    <button onclick="window.location.href='Items.html'">Items</button>
+    <button onclick="window.location.href='AddItems.html'">Add Items</button>
+    <button onclick="window.location.href='FridgeInfo.html'">Fridge Info</button>
+    <button onclick="window.location.href='Inventory.html'">Inventory</button> <!-- Added -->
+  </div>
+
+  <h2 style="color:#ff4d6d; margin-top:30px;">Recipes</h2>
+  <div class="recipes">
+    <div class="recipe-card">
+      <img src="Recipe1.jpg" alt="Recipe 1">
+      <h3>Grilled Veggie Sandwich</h3>
+      <p>Healthy and delicious sandwich using fresh vegetables from your fridge.</p>
+    </div>
+    <div class="recipe-card">
+      <img src="recipe2.jpg" alt="Recipe 2">
+      <h3>Fruit Salad</h3>
+      <p>Refreshing fruit salad with seasonal fruits. Perfect for breakfast or snack.</p>
+    </div>
+    <div class="recipe-card">
+      <img src="recipe3.jpg" alt="Recipe 3">
+      <h3>Vegetable Stir Fry</h3>
+      <p>Quick and easy stir fry using leftover veggies in your fridge. Nutritious meal!</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

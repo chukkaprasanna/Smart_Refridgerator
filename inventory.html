@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventory - Smart Fridge</title>
+<style>
+body { margin:0; font-family: Arial,sans-serif; background: #ffe5ec; }
+.container { width:90%; max-width:700px; margin:50px auto; background:#ffccd5; padding:30px; border-radius:20px; text-align:center; box-shadow:0 0 15px rgba(0,0,0,0.2);}
+h1 { color:#ff4d6d; }
+ul { list-style:none; padding:0; }
+li { background:#fff0f5; margin:10px 0; padding:10px; border-radius:10px; color:#6b2737; }
+button { margin-top:20px; padding:10px 20px; border:none; border-radius:10px; background:#ff4d6d; color:white; cursor:pointer;}
+button:hover { background:#e63956; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Inventory</h1>
+  <p>Store your food safely here. Keep track of expiry dates and receive alerts.</p>
+  <ul id="itemList"></ul>
+  <button onclick="window.location.href='dashboard.html'">Back to Dashboard</button>
+</div>
+
+<script>
+  // Load items from localStorage
+  const itemList = document.getElementById('itemList');
+  const items = JSON.parse(localStorage.getItem('fridgeItems') || '[]');
+  items.forEach(item => {
+    const li = document.createElement('li');
+    li.innerText = `${item.name} - Qty: ${item.quantity} - Expiry: ${item.expiry}`;
+    itemList.appendChild(li);
+  });
+</script>
+</body>
+</html>

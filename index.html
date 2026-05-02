@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Fridge - Welcome</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  /* Background image */
+  background-image: url('background.jpg');
+  background-size: cover;       /* Make it cover full page */
+  background-position: center;  /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat */
+  background-attachment: fixed; /* Keep image fixed on scroll */
+}
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #ffe5ec;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    width: 400px;
+    background: #ffccd5;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    text-align: center;
+  }
+  h1, h2 {
+    color: #ff4d6d;
+    margin-bottom: 20px;
+  }
+  input, button {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  input {
+    background: #fff0f5;
+    border: 1px solid #ff99ac;
+  }
+  button {
+    background: #ff4d6d;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  button:hover {
+    background: #e63956;
+  }
+  a {
+    display: block;
+    margin-top: 10px;
+    color: #e63956;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+  <!-- Pink Theme -->
+  <!-- common CSS here -->
+</head>
+<body>
+  <div class="container">
+    <img src="fridge.jpg" alt="Smart Fridge">
+    <h1>Welcome to Smart Fridge</h1>
+    <p>Track your food, save money, reduce waste!</p>
+    <button onclick="window.location.href='login.html'">Login</button>
+    <button onclick="window.location.href='register.html'">Register</button>
+  </div>
+</body>
+</html>

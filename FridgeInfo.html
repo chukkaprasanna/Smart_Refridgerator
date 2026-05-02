@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fridge Info - Smart Fridge</title>
+<style>
+body { margin:0; font-family: Arial,sans-serif; background:#ffe5ec; display:flex; justify-content:center; }
+.container { width:90%; max-width:900px; margin:50px auto; background:#ffccd5; padding:30px; border-radius:20px; box-shadow:0 0 20px rgba(0,0,0,0.2); text-align:center; }
+h1 { color:#ff4d6d; margin-bottom:20px; }
+.fridge { width:300px; height:500px; margin:20px auto; background:#fff0f5; border:3px solid #ff4d6d; border-radius:10px; padding:10px; box-sizing:border-box; }
+.shelf { height:80px; margin:10px 0; background:#ffe5ec; border-radius:5px; display:flex; flex-wrap:wrap; align-items:center; padding:5px; font-weight:bold; color:#6b2737; }
+.item { width:60px; height:40px; background:#ff99ac; border-radius:5px; margin:2px; display:flex; justify-content:center; align-items:center; color:white; font-size:12px; }
+.control { margin:20px 0; text-align:left; }
+label { display:block; margin:10px 0 5px 0; font-weight:bold; color:#6b2737; }
+input[type=range] { width:100%; }
+.switch { position:relative; display:inline-block; width:60px; height:34px; }
+.switch input { display:none; }
+.slider { position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background:#ccc; transition:.4s; border-radius:34px; }
+.slider:before { position:absolute; content:""; height:26px; width:26px; left:4px; bottom:4px; background:white; transition:.4s; border-radius:50%; }
+input:checked + .slider { background:#ff4d6d; }
+input:checked + .slider:before { transform:translateX(26px); }
+button { margin-top:20px; padding:10px 20px; border:none; border-radius:10px; background:#ff4d6d; color:white; cursor:pointer; }
+button:hover { background:#e63956; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Fridge Info</h1>
+
+  <div class="control">
+    <label>Adjust Temperature: <span id="tempValue">4</span>°C</label>
+    <input type="range" id="tempSlider" min="-35" max="35" value="4">
+    
+    <label>Light:</label>
+    <label class="switch">
+      <input type="checkbox" id="lightSwitch" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="fridge" id="fridge">
+    <div class="shelf" id="shelf1">Shelf 1</div>
+    <div class="shelf" id="shelf2">Shelf 2</div>
+    <div class="shelf" id="shelf3">Shelf 3</div>
+    <div class="shelf" id="shelf4">Shelf 4</div>
+  </div>
+
+  <p>Total Items: <span id="itemCount">0</span></p>
+  <p>Available Shelves: <span id="shelfCount">4</span></p>
+
+  <button onclick="window.location.href='dashboard.html'">Back to Dashboard</button>
+</div>
+
+<script>
+const tempSlider = document.getElementById('tempSlider');
+const tempValue = document.getElementById('tempValue');
+const lightSwitch = document.getElementById('lightSwitch');
+const itemCountEl = document.getElementById('itemCount');
+const shelfCountEl = document.getElementById('shelfCount');
+const shelves = [
+  {el: document.getElementById('shelf1'), capacity: 6},
+  {el: document.getElementById('shelf2'), capacity: 6},
+  {el: document.getElementById('shelf3'), capacity: 6},
+  {el: document.getElementById('shelf4'), capacity: 6}
+];
+
+// Temperature slider
+tempSlider.addEventListener('input', () => tempValue.innerText = tempSlider.value);
+
+// Load items from localStorage
+let items = JSON.parse(localStorage.getItem('fridgeItems') || '[]');
+itemCountEl.innerText = items.length;
+
+// Populate shelves with items according to their shelf selection and capacity
+function populateShelves() {
+  let filledShelvesCount = 0;
+
+  shelves.forEach((shelfObj, index) => {
+    const shelf = shelfObj.el;
+    const capacity = shelfObj.capacity;
+    shelf.innerHTML = shelf.id.replace('shelf','Shelf '); // reset shelf
+
+    // Filter items belonging to this shelf
+    let shelfItems = items.filter(item => item.shelf === `Shelf ${index+1}`);
+    
+    shelfItems.forEach((item, i) => {
+      if(i < capacity){ // only fill up to capacity
+        let div = document.createElement('div');
+        div.className = 'item';
+        div.innerText = item.name;
+        shelf.appendChild(div);
+      }
+    });
+
+    if(shelfItems.length >= capacity){
+      filledShelvesCount++;
+    }
+  });
+
+  shelfCountEl.innerText = shelves.length - filledShelvesCount;
+}
+populateShelves();
+
+// Light toggle
+lightSwitch.addEventListener('change', function(){
+  document.getElementById('fridge').style.background = lightSwitch.checked ? '#fff0f5' : '#e0c2cd';
+});
+</script>
+</body>
+</html>

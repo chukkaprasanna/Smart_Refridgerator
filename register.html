@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Smart Fridge</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #ffe5ec;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      width: 380px;
+      background: #ffccd5;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    input, button {
+      width: 90%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+    input {
+      background: #fff0f5;
+      border: 1px solid #ff99ac;
+    }
+    button {
+      background: #ff4d6d;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #e63956;
+    }
+    p {
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Register</h1>
+  <input type="text" id="name" placeholder="Full Name" required>
+  <input type="email" id="email" placeholder="Email" required>
+  <input type="password" id="password" placeholder="Password" required>
+  <button onclick="registerUser()">Register</button>
+  <p id="message"></p>
+</div>
+
+<script>
+function registerUser() {
+  // Simple demo registration (no backend)
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  if(name && email && password){
+    document.getElementById('message').innerText = "Registration completed successfully!";
+    // Redirect to login after 2 seconds
+    setTimeout(() => {
+      window.location.href = 'login.html';
+    }, 2000);
+  } else {
+    document.getElementById('message').innerText = "Please fill all fields!";
+    document.getElementById('message').style.color = "red";
+  }
+}
+</script>
+
+</body>
+</html>

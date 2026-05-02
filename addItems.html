@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Items - Smart Fridge</title>
+<style>
+body { margin:0; font-family: Arial,sans-serif; background:#ffe5ec; display:flex; justify-content:center; align-items:center; height:100vh; }
+.container { width:400px; background:#ffccd5; padding:30px; border-radius:20px; text-align:center; box-shadow:0 0 15px rgba(0,0,0,0.2); }
+input, select, button { width:90%; padding:12px; margin:10px 0; border-radius:10px; border:none; font-size:16px; }
+input, select { background:#fff0f5; border:1px solid #ff99ac; }
+button { background:#ff4d6d; color:white; cursor:pointer; transition:0.3s; }
+button:hover { background:#e63956; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Add Item</h1>
+  <input type="text" id="itemName" placeholder="Item Name">
+  <input type="number" id="quantity" placeholder="Quantity">
+  <select id="unit">
+    <option value="Packets">Packets</option>
+    <option value="Kg">Kg</option>
+    <option value="Liters">Liters</option>
+  </select>
+  <select id="shelf">
+    <option value="Shelf 1">Shelf 1</option>
+    <option value="Shelf 2">Shelf 2</option>
+    <option value="Shelf 3">Shelf 3</option>
+    <option value="Shelf 4">Shelf 4</option>
+  </select>
+  <input type="date" id="dateAdded">
+  <input type="date" id="expiryDate">
+  <button onclick="addItem()">Add Item</button>
+  <button onclick="window.location.href='dashboard.html'">Back to Dashboard</button>
+</div>
+
+<script>
+function addItem(){
+  const name = document.getElementById('itemName').value;
+  const quantity = document.getElementById('quantity').value;
+  const unit = document.getElementById('unit').value;
+  const shelf = document.getElementById('shelf').value;
+  const dateAdded = document.getElementById('dateAdded').value;
+  const expiry = document.getElementById('expiryDate').value;
+
+  if(!name || !quantity || !unit || !shelf || !dateAdded || !expiry){
+    alert("Please fill all fields!");
+    return;
+  }
+
+  // Save item in localStorage
+  let items = JSON.parse(localStorage.getItem('fridgeItems') || '[]');
+
+  // Shelf capacity check
+  const shelfItems = items.filter(item => item.shelf === shelf);
+  if(shelfItems.length >= 6){
+    alert(`${shelf} is full! Choose another shelf.`);
+    return;
+  }
+
+  items.push({name, quantity, unit, shelf, dateAdded, expiry});
+  localStorage.setItem('fridgeItems', JSON.stringify(items));
+  alert("Item added successfully!");
+
+  // Reset form
+  document.getElementById('itemName').value = '';
+  document.getElementById('quantity').value = '';
+  document.getElementById('unit').value = 'Packets';
+  document.getElementById('shelf').value = 'Shelf 1';
+  document.getElementById('dateAdded').value = '';
+  document.getElementById('expiryDate').value = '';
+}
+</script>
+</body>
+</html>
